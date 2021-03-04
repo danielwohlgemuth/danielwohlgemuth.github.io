@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset='UTF-8'>
+</head>
+
+<body>
+  <div id='identicon'></div>
+  <button onclick='generateIdenticon()'>Generate Identicon</button>
+  <button onclick='downloadImage()'>Download Image</button>
+
+  <script>
+    function getRandomInt(max) {
+      return Math.floor(Math.random() * max)
+    }
+
+    function generateShape() {
+      let shapes = [
+        `<path d='M0,0 v100 a100,100 0 0,0 100,-100 z'/>`,
+        `<path d='M0,0 v100 a50,50 0 0,0 0,-100 z'/>`,
+        `<circle cx='50' cy='50' r='50'/>`,
+        `<rect x='0' y='0' width='50' height='100'/>`,
+        `<rect x='0' y='0' width='100' height='100'/>`,
+        `<rect x='0' y='0' width='0' height='0'/>`,
+        `<rect x='0' y='0' width='50' height='50'/>`,
+        `<path d='M0,0 l0,100 l50,0 l0,-50 l50,0 l0,-50 z'/>`,
+        `<path d='M0,0 l50,0 l0,100 l50,0 l0,-50 l-100,0 z'/>`,
+        `<path d='M0,0 l50,100 l50,-100 z'/>`,
+        `<path d='M0,0 l0,100 l50,-100 l50,100 l0,-100 z'/>`,
+        `<path d='M0,0 l100,100 l-100,0 z'/>`,
+        `<path d='M0,0 l0,50 l50,-50 l50,50 l-50,50 l-50,-50 z'/>`,
+      ]
+      let shapePosition = getRandomInt(shapes.length)
+
+      return shapes[shapePosition]
+    }
+
+    function generateQuadShape() {
+      let positions = [
+        { x: 0, y: 0 },
+        { x: 0, y: 100 },
+        { x: 100, y: 0 },
+        { x: 100, y: 100 },
+      ]
+
+      let quadShape = ''
+      positions.forEach(position => {
+        let shape = generateShape()
+        quadShape += `<g transform='translate(${position.x},${position.y})'>${shape}</g>`
+      })
+
+      return quadShape
+    }
+
+    function generateHexaDecShape() {
+      let rotations = [
+        0,
+        90,
+        180,
+        270,
+      ]
+
+      let quadShape = generateQuadShape()
+
+      let hexaDecShape = ''
+      rotations.forEach(rotation => {
+        hexaDecShape += `<g transform='rotate(${rotation} 200 200)'>${quadShape}</g>`
+      })
+
+      return hexaDecShape
+    }
+
+    function generateColor() {
+      // From https://clrs.cc/
+      let colors = [
+        '#7FDBFF',
+        '#111111',
+        '#0074D9',
+        '#F012BE',
+        '#2ECC40',
+        '#01FF70',
+        '#85144B',
+        '#001F3F',
+        '#3D9970',
+        '#FF851B',
+        '#B10DC9',
+        '#FF4136',
+        '#AAAAAA',
+        '#39CCCC',
+        '#FFDC00',
+      ]
+
+      let colorPosition = getRandomInt(colors.length)
+
+      return colors[colorPosition]
+    }
+
+    function generateSvg() {
+      let scale = 1
+      let color = generateColor()
+      let hexaDecShape = generateHexaDecShape()
+      return `<svg 
+                  xmlns='http://www.w3.org/2000/svg' 
+                  id='svg' 
+                  height='${400*scale}' 
+                  width='${400*scale}' 
+                  color='${color}' 
+                  fill='currentcolor' 
+                  style='background-color: white'>
+                <g transform='scale(${scale})'>
+                  ${hexaDecShape}
+                </g>
+              </svg>`
+    }
+
+    function generateIdenticon() {
+      let svg = generateSvg()
+
+      let identicon = document.getElementById('identicon')
+      identicon.innerHTML = svg
+    }
+
+    window.onload = generateIdenticon
+  </script>
+
+  <script>
+    function getSvgUrl(svg) {
+      let data = new XMLSerializer().serializeToString(svg)
+      let blob = new Blob([data], { type: 'image/svg+xml' })
+      return window.URL.createObjectURL(blob)
+    }
+
+    function createCanvas(height, width) {
+      let canvas = document.createElement('canvas')
+      canvas.height = height
+      canvas.width = width
+      return canvas
+    }
+
+    function getCanvasUri(canvas, img, url) {
+      canvas.getContext('2d').drawImage(img, 0, 0)
+      window.URL.revokeObjectURL(url)
+      return canvas.toDataURL('image/png').replace('image/png', 'octet/stream')
+    }
+
+    function triggerDownload(uri) {
+      let a = document.createElement('a')
+      a.href = uri
+      a.download = 'identicon.png'
+      a.click()
+      window.URL.revokeObjectURL(uri)
+    }
+
+    function downloadImage() {
+      let svg = document.getElementById('svg')
+      let height = svg.getAttribute('height')
+      let width = svg.getAttribute('width')
+      let url = getSvgUrl(svg)
+
+      let canvas = createCanvas(height, width)
+
+      let img = new Image()
+      img.onload = function () {
+        let uri = getCanvasUri(canvas, img, url)
+        triggerDownload(uri)
+      }
+      img.src = url
+    }
+  </script>
+</body>
+
+</html>

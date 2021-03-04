@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset='UTF-8'>
+  <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+  <title>IP in subnet list checker</title>
+  <style>
+    body {
+      font-size: 18px;
+      color: #333;
+    }
+
+    main {
+      max-width: 400px;
+      margin: 0 auto;
+      margin-top: 30px;
+    }
+
+    label {
+      display: block;
+    }
+
+    input,
+    textarea {
+      display: block;
+      width: 95%;
+      max-width: 95%;
+      font-size: inherit;
+      font-family: inherit;
+    }
+
+    textarea {
+      min-width: 95%;
+      min-height: 120px;
+      padding: 8px;
+    }
+
+    table {
+      border-collapse: collapse;
+    }
+
+    svg {
+      width: 24px;
+      height: 24px;
+      position: absolute;
+      bottom: 0;
+      margin-left: -30px;
+    }
+
+    .bold {
+      font-weight: 700;
+    }
+
+    .relative {
+      position: relative;
+    }
+
+    .mb {
+      margin-bottom: 30px;
+    }
+
+    .pl {
+      padding-left: 30px;
+    }
+  </style>
+</head>
+
+<body>
+  <main>
+    <div class='mb'>
+      <label for='ip' class='bold'>IPv4 address</label>
+      <input id='ip' placeholder='1.2.3.1' />
+    </div>
+
+    <div class='mb'>
+      <label for='subnet-list' class='bold'>Subnet list with mask</label>
+      <textarea id='subnet-list' placeholder='1.2.3.4/24&#10;5.6.7.8/24'></textarea>
+    </div>
+
+    <hr class='mb'>
+
+    <div class='mb'>
+      <span class='bold pl'>Legend</span>
+      <div id='icon-legend'></div>
+    </div>
+
+    <div class='mb'>
+      <span class='bold pl'>IPv4 address</span>
+      <div id='output-ip'></div>
+    </div>
+
+    <table>
+      <thead>
+        <tr class='bold'>
+          <td class='pl'></td>
+          <td>Subnet</td>
+        </tr>
+      </thead>
+      <tbody id='output-list'></tbody>
+    </table>
+  </main>
+
+  <script>
+    function ipToInt(ip) {
+      // From https://gist.github.com/jppommet/5708697
+      return ip.split('.').reduce(function (ipInt, octet) { return (ipInt << 8) + parseInt(octet, 10) }, 0) >>> 0
+    }
+
+    function isIpValid(ip) {
+      // From https://stackoverflow.com/a/27434991/7526052
+      return /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/.test(ip)
+    }
+
+    function isSubnetValid(subnet) {
+      // From https://stackoverflow.com/a/26445549/7526052 in comment section
+      return /^(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9])\.(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9])\.(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9])\.(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9])(\/([1-2][0-9]|3[0-2]|[0-9]))$/.test(subnet)
+    }
+
+    function splitSubnetAndMask(subnet) {
+      let splitSubnet = subnet.split('/')
+      let maskDifference = 32 - splitSubnet[1]
+
+      let subnetIntIp = ipToInt(splitSubnet[0])
+      let mask = Number((BigInt(4294967295) >> BigInt(maskDifference)) << BigInt(maskDifference))
+
+      return { 'subnet': subnetIntIp, 'mask': mask }
+    }
+
+    function isIpInSubnet(ip, subnet) {
+      let intIp = ipToInt(ip)
+      let split = splitSubnetAndMask(subnet)
+
+      let minIp = Number(BigInt(split.subnet) & BigInt(split.mask))
+      let maxIp = Number(BigInt(split.subnet) | BigInt(~split.mask))
+
+      return minIp <= intIp && intIp <= maxIp
+    }
+
+    function processSubnet(ip, subnet) {
+      let containsIp = false
+      let isValid = isSubnetValid(subnet)
+
+      if (isValid) {
+        containsIp = isIpInSubnet(ip, subnet)
+      }
+
+      return { subnet, isValid, containsIp }
+    }
+
+    function processSubnetList(ip, subnetList) {
+      if (isIpValid(ip)) {
+        return subnetList.map(subnet => processSubnet(ip, subnet))
+      } else {
+        return []
+      }
+    }
+
+    function getIcon(isValid, containsIp) {
+      // From https://materialdesignicons.com/
+      if (!isValid) {
+        return `<svg viewBox='0 0 24 24'><path fill='orange' d='M13,14H11V10H13M13,18H11V16H13M1,21H23L12,2L1,21Z' /></svg>`
+      } else if (!containsIp) {
+        return `<svg viewBox='0 0 24 24'><path fill='red' d='M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z' /></svg>`
+      } else {
+        return `<svg viewBox='0 0 24 24'><path fill='green' d='M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z' /></svg>`
+      }
+    }
+
+    function encodeHTML(s) {
+      return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, '&quot;').replace(/'/g, '&#x27;')
+    }
+
+    function generateProcessedIp(ip) {
+      if (isIpValid(ip)) {
+        return `<div class='relative pl'>${ip}</div>`
+      } else {
+        return `<div class='relative pl'>${getIcon(false, false)} ${ip ? encodeHTML(ip) : '&lt;empty&gt;'}</div>`
+      }
+    }
+
+    function generateProcessedSubnet(subnet) {
+      let iconPart = `<td class='relative pl'>${getIcon(subnet.isValid, subnet.containsIp)}</td>`
+      let subnetPart = `<td>${subnet.subnet ? encodeHTML(subnet.subnet) : '&lt;empty&gt;'}</td>`
+      return `<tr>${iconPart}${subnetPart}</tr>`
+    }
+
+    function generateProcessedSubnetList(subnetList) {
+      return subnetList.map(subnet => generateProcessedSubnet(subnet)).join('')
+    }
+
+    function getIconLegend() {
+      let legends = [
+        `<div class='relative pl'>${getIcon(false, false)} Invalid format</div>`,
+        `<div class='relative pl'>${getIcon(true, false)} IP is NOT in subnet</div>`,
+        `<div class='relative pl'>${getIcon(true, true)} IP is in subnet</div>`
+      ]
+      return `<div>${legends.join('')}</div>`
+    }
+
+    function findMatchingSubnets() {
+      let ipInput = document.getElementById('ip')
+      let subnetListInput = document.getElementById('subnet-list')
+      let outputIpElem = document.getElementById('output-ip')
+      let outputListElem = document.getElementById('output-list')
+
+      let ip = ipInput.value
+      let subnetList = subnetListInput.value.split(/\n/)
+
+      let processedSubnetList = processSubnetList(ip, subnetList)
+
+      outputIpElem.innerHTML = generateProcessedIp(ip)
+      outputListElem.innerHTML = generateProcessedSubnetList(processedSubnetList)
+    }
+
+    function getIconLegend() {
+      let legends = [
+        `<div class='relative pl'>${getIcon(false, false)} Invalid format</div>`,
+        `<div class='relative pl'>${getIcon(true, false)} IP is NOT in subnet</div>`,
+        `<div class='relative pl'>${getIcon(true, true)} IP is in subnet</div>`
+      ]
+      return `<div>${legends.join('')}</div>`
+    }
+
+    function setup() {
+      let ipInput = document.getElementById('ip')
+      let subnetListInput = document.getElementById('subnet-list')
+      let iconLegend = document.getElementById('icon-legend')
+
+      ipInput.addEventListener('input', findMatchingSubnets)
+      subnetListInput.addEventListener('input', findMatchingSubnets)
+
+      iconLegend.innerHTML = getIconLegend()
+
+      findMatchingSubnets()
+    }
+
+    window.onload = setup
+  </script>
+</body>
+
+</html>
