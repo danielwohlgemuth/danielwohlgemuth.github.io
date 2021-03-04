@@ -1,0 +1,19 @@
+name: gh-pages publisher 🚀
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  publish-gh-pages:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+            node-version: 12
+      - run: npm ci
+      - run: git config user.name "Daniel Wohlgemuth" && git config user.email "${{secrets.GIT_EMAIL}}"
+      - run: npm run deploy
+    env:
+        GH_TOKEN: ${{secrets.SECRET_GITHUB_TOKEN}}
