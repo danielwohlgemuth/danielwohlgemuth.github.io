@@ -62,6 +62,11 @@ const projects = [
     url: "https://github.com/danielwohlgemuth/fuzzy-operators-visualization",
     image: "fuzzy-logic.png",
   },
+  {
+    name: "Send sensor data and visualize it with Grafana",
+    url: "https://github.com/danielwohlgemuth/sensor2graph-micropython-esp32",
+    image: "sensor-to-graph.png",
+  },
 ];
 
 function Home() {
