@@ -2,6 +2,7 @@ import React from "react";
 import { Link, NavLink } from "react-router-dom";
 import {
   AppBar,
+  Box,
   Toolbar,
   makeStyles,
   List,
@@ -12,7 +13,6 @@ import {
 const useStyles = makeStyles({
   navListDisplayFlex: {
     display: `flex`,
-    justifyContent: `space-between`,
     alignContent: `center`,
   },
   linkText: {
@@ -27,20 +27,22 @@ function Navbar() {
 
   return (
     <AppBar position="static">
-      <Toolbar>
-        <List className={classes.navListDisplayFlex}>
-          <Link to="/" className={classes.linkText}>
-            <ListItem button>
-              <ListItemText primary="Home" />
-            </ListItem>
-          </Link>
-          <NavLink to="/about" className={classes.linkText}>
-            <ListItem button>
-              <ListItemText primary="About" />
-            </ListItem>
-          </NavLink>
-        </List>
-      </Toolbar>
+      <Box display="flex" justifyContent="center">
+        <Toolbar>
+          <List className={classes.navListDisplayFlex}>
+            <Link to="/" className={classes.linkText}>
+              <ListItem button>
+                <ListItemText primary="Home" />
+              </ListItem>
+            </Link>
+            <NavLink to="/about" className={classes.linkText}>
+              <ListItem button>
+                <ListItemText primary="About" />
+              </ListItem>
+            </NavLink>
+          </List>
+        </Toolbar>
+      </Box>
     </AppBar>
   );
 }
