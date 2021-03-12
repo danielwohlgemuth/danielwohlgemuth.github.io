@@ -67,6 +67,11 @@ const projects = [
     url: "https://github.com/danielwohlgemuth/sensor2graph-micropython-esp32",
     image: "sensor-to-graph.png",
   },
+  {
+    name: "Visualize house prices in Kibana",
+    url: "https://github.com/danielwohlgemuth/visualize-house-prices-in-kibana",
+    image: "visualize-house-prices-in-kibana.png",
+  },
 ];
 
 function Home() {
