@@ -8,6 +8,7 @@ import {
   CardMedia,
   Box,
 } from "@material-ui/core";
+import LinkOrUrl from "./LinkOrUrl";
 
 const useStyles = makeStyles({
   title: {
@@ -30,9 +31,6 @@ const useStyles = makeStyles({
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
-  },
-  linkText: {
-    textDecoration: `none`,
   },
   imageContainer: {
     marginTop: "auto",
@@ -72,6 +70,11 @@ const projects = [
     url: "https://github.com/danielwohlgemuth/visualize-house-prices-in-kibana",
     image: "visualize-house-prices-in-kibana.png",
   },
+  {
+    name: "Cost sharing calculator",
+    to: "/app/cost-sharing",
+    image: "cost-sharing.png",
+  },
 ];
 
 function Home() {
@@ -95,9 +98,9 @@ function Home() {
       <Container maxWidth="lg">
         <Grid container spacing={3}>
           {projects.map((project) => (
-            <Grid item xs={12} md={6} lg={4} key={project.url}>
+            <Grid item xs={12} md={6} lg={4} key={project.url || project.to}>
               <Box p={1} className={classes.root}>
-                <a href={project.url} className={classes.linkText}>
+                <LinkOrUrl url={project.url} to={project.to}>
                   <Card className={classes.card} raised={true}>
                     <div className={classes.imageContainer}>
                       <CardMedia
@@ -113,7 +116,7 @@ function Home() {
                       </CardContent>
                     </div>
                   </Card>
-                </a>
+                </LinkOrUrl>
               </Box>
             </Grid>
           ))}
