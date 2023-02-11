@@ -11,7 +11,7 @@ export const round = (num, places) => {
 };
 
 export const calculatePayback = (personList) => {
-  if (personList.length === 0) return [];
+  if (personList.length === 0) return [[],0];
 
   const total = personList.reduce((total, { amount }) => total + amount, 0);
   const average = total / personList.length;

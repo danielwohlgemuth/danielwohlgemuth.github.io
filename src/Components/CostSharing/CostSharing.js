@@ -55,7 +55,7 @@ function CostSharing() {
               />
             </Box>
 
-            <Box mt={5}>
+            <Box mt={5} mb={5}>
               <Payback paybackList={paybackList} />
             </Box>
           </section>
