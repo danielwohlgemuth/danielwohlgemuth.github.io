@@ -75,6 +75,11 @@ const projects = [
     to: "/app/cost-sharing",
     image: "cost-sharing.png",
   },
+  {
+    name: "K inverse pairs distribution",
+    url: "https://github.com/danielwohlgemuth/experiments/tree/main/2024/k-inverse-pairs",
+    image: "k-inverse-pairs-distribution.png",
+  },
 ];
 
 function Home() {
