@@ -17,11 +17,16 @@ function About() {
         </section>
         <section>
           <Typography variant="body1">
+            I'm a software engineer with an interest in backend development and DevOps practices.
+          </Typography>
+        </section>
+        <section>
+          <Typography variant="body1">
             You can find me on{" "}
             <a href="https://www.linkedin.com/in/daniel-wohlgemuth-6982291ba/">
               LinkedIn
             </a>{" "}
-            and <a href="https://github.com/danielwohlgemuth">GitHub</a>.
+            or see some of my projects on <a href="https://github.com/danielwohlgemuth">GitHub</a>.
           </Typography>
         </section>
       </Box>
