@@ -8,6 +8,14 @@ function delay(ms) {
 	return new Promise(resolve => setTimeout(resolve, ms));
 }
 
+function debounce(func, ms) {
+  let timeout;
+  return function(...args) {
+    clearTimeout(timeout);
+    timeout = setTimeout(() => func.apply(this, args), ms);
+  };
+}
+
 function Flashcards({ dictionary }) {
 	const [frontList, setFrontList] = useState(Object.keys(dictionary));
 	const [backList, setBackList] = useState(Object.values(dictionary));
@@ -38,9 +46,7 @@ function Flashcards({ dictionary }) {
 		}
 	};
 
-	const flipFlashcard = () => {
-		setIsFlipped(!isFlipped);
-	}
+	const flipFlashcard = debounce(() => setIsFlipped(!isFlipped), 100);
 
 	useEffect(() => {
 		selectRandomItem();
@@ -50,10 +56,15 @@ function Flashcards({ dictionary }) {
 	return <>
 		<Container maxWidth="sm">
 			<Box mt={5} sx={{ textAlign: "center" }}>
-				<section className={isFlipped ? 'flashcard-flipped' : ''} onClick={flipFlashcard}>
-					<div class="flashcard">
-						<div class="flashcard-inner">
-							<div class="flashcard-front">
+				<section className={isFlipped ? 'flashcard-flipped' : ''}
+					onClick={flipFlashcard}
+					onTouchEnd={flipFlashcard}
+				>
+					<div className="flashcard">
+						<div
+							className="flashcard-inner"
+						>
+							<div className="flashcard-front">
 								<Card mt={5} mb={5} variant="outlined" sx={{
 									fontSize: "150px", width: "100%", height: "100%",
 									display: "flex",
@@ -63,7 +74,7 @@ function Flashcards({ dictionary }) {
 									{item.front}
 								</Card>
 							</div>
-							<div class="flashcard-back">
+							<div className="flashcard-back">
 								<Card mt={5} mb={5} variant="outlined" sx={{
 									fontSize: "150px", width: "100%", height: "100%",
 									display: "flex",
