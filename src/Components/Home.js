@@ -39,6 +39,11 @@ const projects = [
     url: "https://github.com/danielwohlgemuth/experiments/tree/main/2024/k-inverse-pairs",
     image: "k-inverse-pairs-distribution.png",
   },
+  {
+    name: "Hiragana",
+    to: "/app/hiragana",
+    image: "hiragana.png",
+  },
 ];
 
 function Home() {
