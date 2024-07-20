@@ -40,7 +40,7 @@ const projects = [
     image: "k-inverse-pairs-distribution.png",
   },
   {
-    name: "Hiragana",
+    name: "Hiragana flashcards",
     to: "/app/hiragana",
     image: "hiragana.png",
   },
@@ -54,20 +54,17 @@ function Home() {
       </Typography>
 
       <Typography
-        variant="body1"
         align="center"
         sx={{
-          paddingTop: "20px",
-          paddingBottom: "20px",
-          paddingLeft: "20px",
-          paddingRight: "20px",
+          typography: 'body1',
+          p: "20px",
         }}
       >
         A list of different projects that I've worked on to try out ideas or
         technologies.
       </Typography>
 
-      <Container maxWidth="lg">
+      <Container maxWidth="lg" sx={{ pb: 3 }}>
         <Grid container spacing={3}>
           {projects.map((project) => (
             <Grid item xs={12} md={6} lg={4} key={project.url || project.to}>

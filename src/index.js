@@ -5,16 +5,19 @@ import App from "./Components/App";
 import reportWebVitals from "./reportWebVitals";
 import { HashRouter } from "react-router-dom";
 import CssBaseline from "@mui/material/CssBaseline";
+import Theme from "./Components/Theme";
 
 
 const container = document.getElementById('root');
 const root = createRoot(container);
 root.render(
   <React.StrictMode>
-    <CssBaseline />
-    <HashRouter>
-      <App />
-    </HashRouter>
+    <Theme>
+      <CssBaseline />
+      <HashRouter>
+        <App />
+      </HashRouter>
+    </Theme>
   </React.StrictMode>
 );
 
