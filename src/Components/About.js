@@ -11,7 +11,7 @@ function About() {
         </section>
         <section>
           <Typography variant="body1">
-            I'm a software engineer with an interest in backend development and DevOps practices.
+            I'm a software engineer with a special interest in backend development and DevOps practices.
           </Typography>
         </section>
         <section>
