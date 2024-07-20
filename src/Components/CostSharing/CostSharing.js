@@ -1,17 +1,11 @@
 import React, { useState } from "react";
-import { Box, Typography, makeStyles, Container } from "@material-ui/core";
+import { Box, Typography, Container } from "@mui/material";
 import { getEmptyPerson, isEmptyPerson, calculatePayback } from "./utils";
 import Expenses from "./Expenses";
 import Payback from "./Payback";
 
-const useStyles = makeStyles({
-  root: {
-    textAlign: "center",
-  },
-});
 
 function CostSharing() {
-  const classes = useStyles();
   const [personList, setPersonList] = useState([getEmptyPerson()]);
   const [total, setTotal] = useState(0);
   const [paybackList, setPaybackList] = useState([]);
@@ -42,7 +36,7 @@ function CostSharing() {
   return (
     <>
       <Container maxWidth="sm">
-        <Box className={classes.root} mt={5}>
+        <Box mt={5} sx={{ textAlign: "center" }}>
           <section>
             <Typography variant="h4">Cost Sharing</Typography>
           </section>

@@ -8,7 +8,7 @@ import {
   TableHead,
   TableRow,
   Paper,
-} from "@material-ui/core";
+} from "@mui/material";
 
 const Body = ({ paybackList }) => {
   if (paybackList.length === 0) {

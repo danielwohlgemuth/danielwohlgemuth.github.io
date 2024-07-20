@@ -1,47 +1,6 @@
-import {
-  Typography,
-  Container,
-  makeStyles,
-  Grid,
-  Card,
-  CardContent,
-  CardMedia,
-  Box,
-} from "@material-ui/core";
+import { Typography, Container, Grid, Card, CardContent, CardMedia, Box } from "@mui/material";
 import LinkOrUrl from "./LinkOrUrl";
 
-const useStyles = makeStyles({
-  title: {
-    paddingTop: "20px",
-  },
-  description: {
-    paddingTop: "20px",
-    paddingBottom: "20px",
-    paddingLeft: "20px",
-    paddingRight: "20px",
-  },
-  root: {
-    height: "100%",
-  },
-  card: {
-    display: "flex",
-    height: "100%",
-  },
-  details: {
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
-  },
-  imageContainer: {
-    marginTop: "auto",
-    marginBottom: "auto",
-  },
-  image: {
-    height: 150,
-    width: 150,
-    objectFit: "contain",
-  },
-});
 
 const projects = [
   {
@@ -83,20 +42,23 @@ const projects = [
 ];
 
 function Home() {
-  const classes = useStyles();
-
   return (
     <>
-      <Typography variant="h4" align="center" className={classes.title}>
+      <Typography variant="h4" align="center" sx={{ paddingTop: "20px" }}>
         Projects
       </Typography>
 
       <Typography
         variant="body1"
         align="center"
-        className={classes.description}
+        sx={{
+          paddingTop: "20px",
+          paddingBottom: "20px",
+          paddingLeft: "20px",
+          paddingRight: "20px",
+        }}
       >
-        Different projects that I've been working on to try out ideas or
+        A list of different projects that I've worked on to try out ideas or
         technologies.
       </Typography>
 
@@ -104,19 +66,23 @@ function Home() {
         <Grid container spacing={3}>
           {projects.map((project) => (
             <Grid item xs={12} md={6} lg={4} key={project.url || project.to}>
-              <Box p={1} className={classes.root}>
+              <Box p={1} style={{ height: "100%" }}>
                 <LinkOrUrl url={project.url} to={project.to}>
-                  <Card className={classes.card} raised={true}>
-                    <div className={classes.imageContainer}>
+                  <Card sx={{ display: "flex", height: "100%" }} raised={true}>
+                    <div style={{ alignContent: "center" }}>
                       <CardMedia
-                        className={classes.image}
+                        sx={{
+                          height: 150,
+                          width: 150,
+                          objectFit: "contain"
+                        }}
                         image={"/images/" + project.image}
                         component="img"
                         title={project.name}
                       />
                     </div>
-                    <div className={classes.details}>
-                      <CardContent className={classes.content}>
+                    <div style={{ alignContent: "center"}}>
+                      <CardContent>
                         <Typography variant="h6">{project.name}</Typography>
                       </CardContent>
                     </div>

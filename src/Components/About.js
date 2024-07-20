@@ -1,17 +1,11 @@
-import { Box, Typography, makeStyles } from "@material-ui/core";
+import { Box, Typography } from "@mui/material";
 
-const useStyles = makeStyles({
-  root: {
-    textAlign: "center",
-  },
-});
 
 function About() {
-  const classes = useStyles();
 
   return (
     <>
-      <Box className={classes.root} mt={5}>
+      <Box mt={5} sx={{ textAlign: "center" }}>
         <section>
           <Typography variant="body1">Hi, I'm Daniel Wohlgemuth.</Typography>
         </section>
@@ -23,10 +17,10 @@ function About() {
         <section>
           <Typography variant="body1">
             You can find me on{" "}
-            <a href="https://www.linkedin.com/in/daniel-wohlgemuth-6982291ba/">
+            <a href="https://www.linkedin.com/in/danielwohlgemuth/" target="_blank" rel="noreferrer">
               LinkedIn
             </a>{" "}
-            or see some of my projects on <a href="https://github.com/danielwohlgemuth">GitHub</a>.
+            or see some of my projects on <a href="https://github.com/danielwohlgemuth" target="_blank" rel="noreferrer">GitHub</a>.
           </Typography>
         </section>
       </Box>
