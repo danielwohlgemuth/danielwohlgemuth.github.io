@@ -66,7 +66,7 @@ function Flashcards({ dictionary }) {
 						>
 							<div className="flashcard-front">
 								<Card mt={5} mb={5} variant="outlined" sx={{
-									fontSize: "150px", width: "100%", height: "100%",
+									fontSize: "120px", width: "100%", height: "100%",
 									display: "flex",
 									alignItems: "center",
 									justifyContent: "center"
@@ -76,7 +76,7 @@ function Flashcards({ dictionary }) {
 							</div>
 							<div className="flashcard-back">
 								<Card mt={5} mb={5} variant="outlined" sx={{
-									fontSize: "150px", width: "100%", height: "100%",
+									fontSize: "120px", width: "100%", height: "100%",
 									display: "flex",
 									alignItems: "center",
 									justifyContent: "center"
