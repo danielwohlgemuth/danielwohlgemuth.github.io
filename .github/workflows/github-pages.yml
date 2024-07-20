@@ -17,4 +17,4 @@ jobs:
       - run: git config user.email "${{secrets.GIT_EMAIL}}"
       - run: npm run deploy
         env:
-          GITHUB_TOKEN: ${{secrets.TOKEN}}
+          TOKEN: ${{secrets.TOKEN}}

@@ -20,7 +20,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "predeploy": "react-scripts build",
-    "deploy": "gh-pages -d build -r https://danielwohlgemuth:$GITHUB_TOKEN@github.com/danielwohlgemuth/danielwohlgemuth.github.io.git"
+    "deploy": "gh-pages -d build -r https://danielwohlgemuth:$TOKEN@github.com/danielwohlgemuth/danielwohlgemuth.github.io.git"
   },
   "eslintConfig": {
     "extends": [
