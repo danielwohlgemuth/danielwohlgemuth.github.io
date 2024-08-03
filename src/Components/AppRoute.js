@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom";
 import CostSharing from "./CostSharing/CostSharing";
 import Hiragana from "./Japanese/Hiragana";
+import Katakana from "./Japanese/Katakana";
 
 
 function AppRoute() {
@@ -12,6 +13,9 @@ function AppRoute() {
 
     case "hiragana":
       return <Hiragana />;
+
+    case "katakana":
+      return <Katakana />;
 
     default:
       return <div>Unknown App</div>;

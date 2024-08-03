@@ -44,6 +44,11 @@ const projects = [
     to: "/app/hiragana",
     image: "hiragana.png",
   },
+  {
+    name: "Katakana flashcards",
+    to: "/app/katakana",
+    image: "katakana.png",
+  },
 ];
 
 function Home() {
