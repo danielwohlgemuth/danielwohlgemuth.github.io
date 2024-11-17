@@ -4,20 +4,14 @@ import LinkOrUrl from "./LinkOrUrl";
 
 const projects = [
   {
-    name:
-      "Utility to find out if an IPv4 address is contained in an IPv4 address range",
-    url: "/projects/ip-in-subnet-list",
-    image: "ip-in-subnet-list.png",
+    name: "Twitter-style application featuring expiring messages",
+    url: "https://github.com/danielwohlgemuth/aws-bootcamp-cruddur",
+    image: "cruddur.png",
   },
   {
-    name: "Identicon generator using SVG",
-    url: "/projects/svg-identicon",
-    image: "svg-identicon-generator.png",
-  },
-  {
-    name: "Visual representation for a few fuzzy logic operators",
-    url: "https://github.com/danielwohlgemuth/fuzzy-operators-visualization",
-    image: "fuzzy-logic.png",
+    name: "Turn-based game provisioned with infrastructure as code",
+    url: "https://github.com/danielwohlgemuth/experiments/blob/main/2024/turn-based-game-dynamodb-amazon-sns/README.md",
+    image: "turn-based-game.png",
   },
   {
     name: "Send sensor data and visualize it with Grafana",
@@ -30,14 +24,30 @@ const projects = [
     image: "visualize-house-prices-in-kibana.png",
   },
   {
-    name: "Cost sharing calculator",
-    to: "/app/cost-sharing",
-    image: "cost-sharing.png",
+    name: "Visual representation for a few fuzzy logic operators",
+    url: "https://github.com/danielwohlgemuth/fuzzy-operators-visualization",
+    image: "fuzzy-logic.png",
   },
   {
     name: "K inverse pairs distribution",
     url: "https://github.com/danielwohlgemuth/experiments/tree/main/2024/k-inverse-pairs",
     image: "k-inverse-pairs-distribution.png",
+  },
+  {
+    name: "Cost sharing calculator",
+    to: "/app/cost-sharing",
+    image: "cost-sharing.png",
+  },
+  {
+    name:
+      "Utility to find out if an IPv4 address is contained in an IPv4 address range",
+    url: "/projects/ip-in-subnet-list",
+    image: "ip-in-subnet-list.png",
+  },
+  {
+    name: "Identicon generator using SVG",
+    url: "/projects/svg-identicon",
+    image: "svg-identicon-generator.png",
   },
   {
     name: "Hiragana flashcards",
