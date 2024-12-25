@@ -14,6 +14,11 @@ const projects = [
     image: "turn-based-game.png",
   },
   {
+    name: "CI/CD using AWS CodePipeline, CodeBuild, and CodeDeploy",
+    url: "https://github.com/danielwohlgemuth/experiments/blob/main/2024/ci-cd-using-codepipeline-codebuild-and-codedeploy/README.md",
+    image: "ci-cd-pipeline.png",
+  },
+  {
     name: "Send sensor data and visualize it with Grafana",
     url: "https://github.com/danielwohlgemuth/sensor2graph-micropython-esp32",
     image: "sensor-to-graph.png",
@@ -24,7 +29,7 @@ const projects = [
     image: "visualize-house-prices-in-kibana.png",
   },
   {
-    name: "Visual representation for a few fuzzy logic operators",
+    name: "Visual representation of some fuzzy logic operators",
     url: "https://github.com/danielwohlgemuth/fuzzy-operators-visualization",
     image: "fuzzy-logic.png",
   },
