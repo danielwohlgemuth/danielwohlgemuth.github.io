@@ -29,6 +29,11 @@ const projects = [
     image: "visualize-house-prices-in-kibana.png",
   },
   {
+    name: "Self managed reverse proxy and NAT instance on AWS",
+    url: "https://github.com/danielwohlgemuth/experiments/tree/main/2025/aws-simple-architecture",
+    image: "reverse-proxy-nat-instance.png",
+  },
+  {
     name: "Visual representation of some fuzzy logic operators",
     url: "https://github.com/danielwohlgemuth/fuzzy-operators-visualization",
     image: "fuzzy-logic.png",
