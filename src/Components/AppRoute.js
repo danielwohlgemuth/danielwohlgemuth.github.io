@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useParams } from "react-router";
 import CostSharing from "./CostSharing/CostSharing";
 import Hiragana from "./Japanese/Hiragana";
 import Katakana from "./Japanese/Katakana";

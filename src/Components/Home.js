@@ -77,7 +77,6 @@ function Home() {
       <Typography variant="h4" align="center" sx={{ paddingTop: "20px" }}>
         Projects
       </Typography>
-
       <Typography
         align="center"
         sx={{
@@ -88,11 +87,16 @@ function Home() {
         A list of different projects that I've worked on to try out ideas or
         technologies.
       </Typography>
-
       <Container maxWidth="lg" sx={{ pb: 3 }}>
         <Grid container spacing={3}>
           {projects.map((project) => (
-            <Grid item xs={12} md={6} lg={4} key={project.url || project.to}>
+            <Grid
+              key={project.url || project.to}
+              size={{
+                xs: 12,
+                md: 6,
+                lg: 4
+              }}>
               <Box p={1} style={{ height: "100%" }}>
                 <LinkOrUrl url={project.url} to={project.to}>
                   <Card sx={{ display: "flex", height: "100%" }} raised={true}>

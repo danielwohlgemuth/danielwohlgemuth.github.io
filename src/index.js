@@ -3,7 +3,7 @@ import { createRoot } from 'react-dom/client';
 import "./index.css";
 import App from "./Components/App";
 import reportWebVitals from "./reportWebVitals";
-import { HashRouter } from "react-router-dom";
+import { HashRouter } from "react-router";
 import CssBaseline from "@mui/material/CssBaseline";
 import Theme from "./Components/Theme";
 
