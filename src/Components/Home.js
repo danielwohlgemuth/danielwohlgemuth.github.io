@@ -4,6 +4,11 @@ import LinkOrUrl from "./LinkOrUrl";
 
 const projects = [
   {
+    name: "Japanese language learning portal using GenAI",
+    url: "https://github.com/danielwohlgemuth/genai-bootcamp",
+    image: "japanese-language-learning-portal.png",
+  },
+  {
     name: "Twitter-style application featuring expiring messages",
     url: "https://github.com/danielwohlgemuth/aws-bootcamp-cruddur",
     image: "cruddur.png",
