@@ -4,6 +4,11 @@ import LinkOrUrl from "./LinkOrUrl";
 
 const projects = [
   {
+    name: "Let Them Draw: Commission custom drawings from artists",
+    url: "https://github.com/danielwohlgemuth/let-them-draw-infrastructure",
+    image: "let-them-draw.png",
+  },
+  {
     name: "Japanese language learning portal using GenAI",
     url: "https://github.com/danielwohlgemuth/genai-bootcamp",
     image: "japanese-language-learning-portal.png",
