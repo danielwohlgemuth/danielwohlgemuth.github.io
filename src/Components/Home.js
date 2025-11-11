@@ -44,6 +44,11 @@ const projects = [
     image: "reverse-proxy-nat-instance.png",
   },
   {
+    name: "Sporthive API Scraper",
+    url: "https://github.com/danielwohlgemuth/sporthive-api-scraper",
+    image: "sporthive-api-scraper.png",
+  },
+  {
     name: "Visual representation of some fuzzy logic operators",
     url: "https://github.com/danielwohlgemuth/fuzzy-operators-visualization",
     image: "fuzzy-logic.png",
