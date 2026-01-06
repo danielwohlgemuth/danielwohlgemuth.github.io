@@ -44,6 +44,11 @@ const projects = [
     image: "reverse-proxy-nat-instance.png",
   },
   {
+    name: "Offline Speech to Text Transcription",
+    url: "https://github.com/danielwohlgemuth/speech-to-text",
+    image: "speech-to-text.png",
+  },
+  {
     name: "Sporthive API Scraper",
     url: "https://github.com/danielwohlgemuth/sporthive-api-scraper",
     image: "sporthive-api-scraper.png",
