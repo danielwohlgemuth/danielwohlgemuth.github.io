@@ -10,8 +10,11 @@ function About() {
           Hi, I'm Daniel Wohlgemuth.
         </Typography>
         <Typography sx={{ typography: 'body1', lineHeight: 2 }}>
-          I'm a full-stack developer, leaning towards backend development and DevOps, with decent frontend skills. I use this site to share some of my more interesting projects and mini-apps.
+          I'm a full-stack developer, leaning towards backend development and DevOps, with decent frontend skills.
         </Typography>
+        <Typography sx={{ typography: 'body1', lineHeight: 2 }}>
+          I use this site to share some of my more interesting projects and mini-apps.
+	</Typography>
         <Typography sx={{ typography: 'body1', lineHeight: 2 }}>
           You can find me on{" "}
           <Link href="https://www.linkedin.com/in/danielwohlgemuth/" target="_blank" rel="noreferrer">
